@@ -1,8 +1,17 @@
-# Sodo15T9 - Microservice Architecture Documentation
+# 🏗️ Sodo15T9 - Microservice Architecture Documentation
+
+## 🔐 **QUAN TRỌNG: Tính năng Đăng nhập**
+
+### 🚨 LƯU Ý Bảo mật
+Dự án này có tính năng đăng nhập để bảo vệ tài liệu. **KHÔNG ĐƯỢC** bỏ qua hoặc xóa trang đăng nhập!
+
+### 🔑 Thông tin Đăng nhập
+- **Username:** `Hpt`
+- **Password:** `Hpt@768696`
 
 ## 🏗️ Tổng quan
 
-Dự án **Sodo15T9** là một tài liệu kiến trúc microservice tương tác với sơ đồ chi tiết và hướng dẫn triển khai đầy đủ.
+Dự án **Sodo15T9** là một tài liệu kiến trúc microservice tương tác với sơ đồ chi tiết, hướng dẫn triển khai đầy đủ và **tính năng bảo mật đăng nhập**.
 
 ## 🎯 Tính năng chính
 
@@ -26,13 +35,27 @@ Dự án **Sodo15T9** là một tài liệu kiến trúc microservice tương t�
 
 ## 🚀 Cách sử dụng
 
-### Truy cập trực tiếp
-Mở file `Sodo/sodochuan.html` trong trình duyệt hoặc chạy local server:
+### ⚠️ QUAN TRỌNG: Luồng Đăng nhập
+1. **Kiểm tra trước khi chạy:**
+   ```bash
+   ./check_login.sh
+   ```
 
+2. **Chạy server:**
+   ```bash
+   python -m http.server 8000 --bind 0.0.0.0
+   ```
+
+3. **Truy cập ứng dụng:**
+   - Mở: `http://localhost:8000/`
+   - Sẽ tự động chuyển đến trang đăng nhập
+   - Nhập: Username `Hpt`, Password `Hpt@768696`
+   - Sau đăng nhập → Xem sơ đồ microservice
+
+### ❌ KHÔNG làm như này:
 ```bash
-cd Sodo
-python -m http.server 8000
-# Truy cập: http://localhost:8000/sodochuan.html
+# SAI - Bỏ qua đăng nhập
+http://localhost:8000/Sodo/sodochuan.html
 ```
 
 ### Điều khiển Sơ đồ
