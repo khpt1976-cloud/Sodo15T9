@@ -597,7 +597,7 @@
                 
                 <div class="doc-header" id="introduction">
                     <h1>Tài liệu Kiến trúc Microservice</h1>
-                    <p>Hướng dẫn chi tiết về 56 thành phần và cách chúng kết hợp thành các ứng dụng độc lập</p>
+                    <p>Hướng dẫn chi tiết về 58 thành phần và cách chúng kết hợp thành các ứng dụng độc lập</p>
                 </div>
 
         <div class="doc-section" id="roadmap">
@@ -640,12 +640,12 @@ Phase 6: AGENT MANAGEMENT (Tuần 13-14) - 4 khối
 ├── Agent Management Service + DB
 └── Agent Policy Service + DB
 
-Phase 7: FRONTEND APPLICATIONS (Tuần 15-18) - 26 khối
+Phase 7: FRONTEND APPLICATIONS (Tuần 15-18) - 27 khối
 ├── Shell App User + Shell App Admin (2 khối)
 ├── User Frontend Components (12 khối)
-└── Admin Frontend Components (12 khối)
+└── Admin Frontend Components (13 khối)
 
-TOTAL: 56 khối trong 18 tuần
+TOTAL: 57 khối trong 18 tuần
                 </pre>
             </div>
 
@@ -808,7 +808,7 @@ Frontend Architecture Flow:
                 </div>
             </div>
 
-            <h3>Admin Frontend Components (12 khối)</h3>
+            <h3>Admin Frontend Components (13 khối)</h3>
             <div class="component-grid">
                 <div class="component-card">
                     <h4>Cart Service Admin</h4>
@@ -857,6 +857,10 @@ Frontend Architecture Flow:
                 <div class="component-card">
                     <h4>Agent Policy Admin</h4>
                     <p>Quản trị chính sách đại lý: policy creation, compliance monitoring</p>
+                </div>
+                <div class="component-card">
+                    <h4>Shell Config Admin</h4>
+                    <p>Quản trị cấu hình Shell: dynamic settings, feature flags, environment configurations</p>
                 </div>
             </div>
         </div>
@@ -1117,7 +1121,7 @@ Frontend Architecture Flow:
                 </div>
                 <div class="component-card" style="border-left: 4px solid #3498db;">
                     <h4>🔷 21-44. Frontend Components</h4>
-                    <p><strong>Micro-frontends:</strong> 12 User FE + 12 Admin FE</p>
+                    <p><strong>Micro-frontends:</strong> 12 User FE + 13 Admin FE</p>
                     <p><strong>Dependencies:</strong> Shell Apps, Backend Services</p>
                 </div>
             </div>
@@ -1275,6 +1279,7 @@ Parallel Development Possible:
                     <li><strong>Message Broker:</strong> Inter-service communication</li>
                     <li><strong>Cache (Redis):</strong> Performance optimization, session storage</li>
                     <li><strong>Shell App User/Admin:</strong> Frontend orchestration shells</li>
+                    <li><strong>Infrastructure Layer:</strong> Docker, Kubernetes, Cloud Services, Monitoring, Logging, Security</li>
                 </ul>
             </div>
 
@@ -1479,11 +1484,11 @@ Lợi ích của kiến trúc này:
 
         <div class="doc-section" id="backend">
             <h2>📊 Tổng kết Kiến trúc</h2>
-            <p><strong>Tổng cộng: 56 thành phần tạo thành 13 ứng dụng độc lập</strong></p>
+            <p><strong>Tổng cộng: 58 thành phần tạo thành 13 ứng dụng độc lập + 1 Infrastructure Layer</strong></p>
             <ul>
                 <li><strong>Ứng dụng Nghiệp vụ Độc lập:</strong> 12 ứng dụng (36 khối)</li>
                 <li><strong>Ứng dụng Hỗ trợ:</strong> 1 ứng dụng Shell Config (2 khối)</li>
-                <li><strong>Shared Infrastructure:</strong> 18 khối (API Gateway, Message Broker, Cache, Shell Apps)</li>
+                <li><strong>Shared Infrastructure:</strong> 20 khối (API Gateway, Message Broker, Cache, Shell Apps, Infrastructure Layer)</li>
             </ul>
             <p>Kiến trúc này đảm bảo tính <strong>scalability</strong>, <strong>maintainability</strong> và <strong>independence</strong> của từng ứng dụng, cho phép phát triển và triển khai hoàn toàn độc lập.</p>
         </div>
@@ -1545,6 +1550,7 @@ graph TB
             AdminAdminFE[Admin Service Admin<br>Quản trị Hệ thống]:::adminfe
             AgentManagementAdminFE[Agent Management Admin<br>Quản trị Đại lý]:::adminfe
             AgentPolicyAdminFE[Agent Policy Admin<br>Quản trị Chính sách Đại lý]:::adminfe
+            ShellConfigAdminFE[Shell Config Admin<br>Quản trị Cấu hình Shell]:::adminfe
         end
     end
 
@@ -1636,6 +1642,7 @@ graph TB
     ShellAppAdmin --> AdminAdminFE
     ShellAppAdmin --> AgentManagementAdminFE
     ShellAppAdmin --> AgentPolicyAdminFE
+    ShellAppAdmin --> ShellConfigAdminFE
 
     %% Frontend components kết nối với backend services thông qua API Gateway
     CartFE --> APIGatewayUser
@@ -1664,6 +1671,7 @@ graph TB
     AdminAdminFE --> APIGatewayAdmin
     AgentManagementAdminFE --> APIGatewayAdmin
     AgentPolicyAdminFE --> APIGatewayAdmin
+    ShellConfigAdminFE --> APIGatewayAdmin
 
     APIGatewayUser --> CartService
     APIGatewayUser --> ProductService
@@ -1725,6 +1733,12 @@ graph TB
     AgentManagementService --> AgentManagementDB
     AgentPolicyService --> AgentPolicyDB
 
+    %% Infrastructure Layer - Nền tảng hạ tầng độc lập
+    subgraph "🏗️ Infrastructure Layer"
+        direction TB
+        InfrastructureBase[Infrastructure<br/>Nền tảng hạ tầng<br/>Docker, Kubernetes, Cloud Services<br/>Monitoring, Logging, Security]:::infrastructure
+    end
+
     classDef group1 fill:#E6F3FF,stroke:#333,stroke-width:2px
     classDef group2 fill:#F0FFF0,stroke:#333,stroke-width:2px
     classDef group3 fill:#FFF0F5,stroke:#333,stroke-width:2px
@@ -1732,6 +1746,7 @@ graph TB
     classDef newdb fill:#FFE4B5,stroke:#333,stroke-width:2px
     classDef frontend fill:#E6E6FA,stroke:#4B0082,stroke-width:2px
     classDef adminfe fill:#FFE4E1,stroke:#DC143C,stroke-width:2px
+    classDef infrastructure fill:#F5F5F5,stroke:#2C3E50,stroke-width:3px
     
     %% Định nghĩa màu nền cho subgraph
     classDef subgraph1 fill:#E3F2FD,stroke:#333,stroke-width:2px
